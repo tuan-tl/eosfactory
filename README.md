@@ -1,87 +1,164 @@
-# Welcome to EOSFactory v3.4.0
-
-[EOSFactory](http://eosfactory.io/) is a Python-based [EOS](https://eos.io) smart-contract development & testing framework, created by [Tokenika](https://tokenika.io).
-
-With a single command-line interface you can create a private testnet and then compile, test and deploy EOS smart-contracts.
-
-All of this using simple yet powerful [Python3](https://www.python.org/) syntax.
-
-## Why it’s needed?
-
-Code development and testing involve tasks that need to be executed hundreds of times, and each time in exactly the same way and exactly the same context. Therefore those tasks need to be fully automated, as otherwise a lot of time is being wasted and, what’s even worse, a lot of additional uncertainty is introduced. Manually performed actions are prone to errors.
-
-And this is what *EOSFactory* actually brings to the table: an easy & intuitive way to automate the process of dealing with smart-contracts. Write down, in the form of a Python script, what needs to be done multiple times in exactly the same way and exactly the same context, and then just run the script. *EOSFactory* will take care of everything else: it will compile your smart-contract, create a new local testnet, deploy the contract, invoke its methods and verify the response, then tear down the testnet, and finally report the results. And all of this done in a couple of seconds.
-
-## Main features
-
-#### 1. Object-oriented
-
-When you use tools like `cleos` all you have at your disposal is issuing separate, one-off commands, as `cleos` is not able to keep your state. Thus each time you interact with a contract, you need to tell `cleos` which contract and which account you mean. Contrary to that, in *EOSFactory* everything is an object. You create a contract (or an account), keep reference to it and then invoke its various methods.
-
-#### 2. Simple syntax
-
-The front-end of *EOSFactory* is simply a Python3 *Command Line Interface*. This way you can interact with EOS smart-contract, and prove it works as expected, instead having to deal with the raw primitives of the EOSIO `cleos`. In most cases Python syntax is immediately clear for everyone.
-
-#### 3. Support for both local and remote testnet
-
-Running tests on a public testnet is much more complex than using a local one where you have full control. The whole infrastructure of *EOSFactory* is designed in such a way that the same test is able to work in both environments, and switching between them is just a matter of changing one parameter.
-
-#### 4. Aliases for account names
-
-*EOSIO* accounts are indexed by their names, thus those names have to be unique within the blockchain namespace and have to follow specific restrictions. As a result, most of the human readable combinations are already taken, even in a testnet environment. *EOSFactory* hides the actual names of an *EOSIO* accounts behind a system of human-friendly aliases.
-
-#### 5. Truly cross-platform
-
-We make sure everything we do is fully compatible with Windows - our toolset enables you to run an EOS node and interact with it on any operating system, including Windows, MacOS and Linux.
-
-## User documentation
-
-* [Introduction to EOSFactory](docs/tutorials/00.IntroductionToEOSFactory.md)
-* [Installing EOSFactory](docs/tutorials/01.InstallingEOSFactory.md)
-* [Interacting with EOS Contracts in EOSFactory](docs/tutorials/02.InteractingWithEOSContractsInEOSFactory.md)
-* [Building and Deploying EOS Smart-Contracts in EOSFactory](docs/tutorials/03.BuildingAndDeployingEOSContractsInEOSFactory.md)
-* [Working with EOS Smart-Contracts Using EOSFactory in VSC](docs/tutorials/04.WorkingWithEOSContractsUsingEOSFactoryInVSC.md)
-* [Interacting with Public Testnets](docs/tutorials/05.InteractingWithPublicTestnet.md)
-* [Using EOSFactory with an Existing EOS Smart-Contract Project](docs/tutorials/06.UsingEOSFactoryWithExistingProject.md)
-
-## Use cases
-
-* [Wallet Class](docs/cases/wallet.md)
-* [Symbolic Names](docs/cases/symbolic_names.md)
-* [Account Class](docs/cases/account.md)
-* [Master Account](docs/cases/master_account.md)
-
-## Complete documentation
-
-Please refer to the [table of contents](https://eosfactory.io/build/html/index.html).
+## Dependencies
 
 
-## Release notes
+## Installation
+Clone EOSFactory source code from the repository:
+```sh
+git clone https://github.com/tokenika/eosfactory.git
+```
+Run the `install` script:
+```sh
+cd eosfactory
+./install.sh
+```
+When prompted, supply the path pointing to the location of your smart-contract workspace:
+```sh
+## For example:
+/Users/tuantran/Documents/workspace/contracts
+```
+Verify if EOSFactory works and is properly hooked up to EOSIO:
+```sh
+python3 -m eosfactory.config
+```
+Below is a sample of correct configuration:
+```
+EOSFactory version 3.4.0
+Found eosio version 1.8.1
+Found eosio.cdt version 1.6.2.
+... all the dependencies are in place.
 
-Please refer to [this document](docs/ReleaseNotes.md).
 
-## Roadmap
+EOSFactory package is installed as a link to the directory:
+    '/Users/tuantran/Documents/workspace/eosfactory/eosfactory/'
+    
 
-Our long-term goal is to turn *EOSFactory* into a comprehensive IDE (Integrated Development Environment) for EOS smart-contracts.
+The current configuration of EOSFactory:
+{
+    "CONFIG_FILE": "/Users/tuantran/Documents/workspace/eosfactory/config/config.json",
+    "EOSFACTORY_DATA_DIR": "/Users/tuantran/Documents/workspace/eosfactory",
+    "EOSFACTORY_DIR": "/Users/tuantran/Documents/workspace/eosfactory",
+    "EOSIO_CDT_ROOT": "/usr/local/Cellar/eosio.cdt/1.6.2/opt/eosio.cdt/",
+    "EOSIO_CDT_VERSION": [
+        "1.6.2"
+    ],
+    "EOSIO_CLI_EXECUTABLE": "cleos",
+    "EOSIO_CONTRACT_WORKSPACE": "/Users/tuantran/Documents/workspace/contracts",
+    "EOSIO_CPP": "eosio-cpp",
+    "EOSIO_CPP_INCLUDES": [
+        "/usr/local/Cellar/eosio.cdt/1.6.2/opt/eosio.cdt/include",
+        "/usr/local/Cellar/eosio.cdt/1.6.2/opt/eosio.cdt/include/libcxx",
+        "/usr/local/Cellar/eosio.cdt/1.6.2/opt/eosio.cdt/include/eosiolib/core",
+        "/usr/local/Cellar/eosio.cdt/1.6.2/opt/eosio.cdt/include/eosiolib/contracts"
+    ],
+    "EOSIO_GENESIS_JSON": null,
+    "EOSIO_KEY_PRIVATE": "5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3",
+    "EOSIO_KEY_PUBLIC": "EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV",
+    "EOSIO_SHARED_MEMORY_SIZE_MB": "300",
+    "EOSIO_VERSION": [
+        "1.8.1"
+    ],
+    "INCLUDE": null,
+    "KEOSD_EXECUTABLE": "keosd",
+    "KEOSD_WALLET_DIR": "/Users/tuantran/eosio-wallet/",
+    "LIBS": null,
+    "LOCAL_NODE_ADDRESS": "127.0.0.1:8888",
+    "LOCAL_NODE_EXECUTABLE": "nodeos",
+    "NODEOS_CONFIG_DIR": null,
+    "NODEOS_DATA_DIR": null,
+    "NODEOS_OPTIONS": [],
+    "NODEOS_STDOUT": null,
+    "TEMPLATE_DIR": "/Users/tuantran/Documents/workspace/eosfactory/templates/contracts",
+    "VERSION": "3.4.0",
+    "WALLET_MANAGER_ADDRESS": "127.0.0.1:8888",
+    "WSL_ROOT": ""
+}
 
-- [Plan for Subsequent EOSFactory Releases](docs/roadmap/PlanForSubsequentEOSFactoryReleases.md)
-- [Long-term EOSFactory Roadmap](docs/roadmap/LongTermEOSFactoryRoadmap.md)
-
-## Support
-
-For issues not covered in the documentation there is a dedicated [EOS Factory Support](https://t.me/EOSFactorySupport) channel on Telegram.
-
-## Licence
-
-This code is provided as is, under [MIT Licence](LICENCE).
+You can overwrite the above settings with entries in the configuration 
+file located here:
+/Users/tuantran/Documents/workspace/eosfactory/config/config.json
 
 
-Your question is not clear to me.
-If you refer to the statement from the tutorial *InstallingEOSFactory*:
+There are undefined setting:
+{
+    "EOSIO_GENESIS_JSON": null,
+    "INCLUDE": null,
+    "LIBS": null,
+    "NODEOS_CONFIG_DIR": null,
+    "NODEOS_DATA_DIR": null,
+    "NODEOS_STDOUT": null
+}
+```
+## Test Contracts
+Create a new contract
+```sh
+cd eosfactory
+python3 -m eosfactory.create_project $CONTRACT_NAME
+```
+To test a smart contract, use this command
+```sh
+python3 $DIRECTORY/$TEST_FILE
 
-*EOSIO* deployed in Docker is NOT supported.*.
+## For example:
+## python3 tests/hello_world.py
+```
+## Troubleshooting
+### Error: The local 'nodeos' failed to start few times in sequence
+This error may come from a variety of causes, however, most of them are because of the incorrect configuration of nodes.
 
-Here we communicate that *EOSIO* executable has to be installed in the system directly, and not as a Docker image.
+Firstly, try a random `cleos` command:
+```sh
+cleos wallet list
+```
+If you see some warning `errors` like the below:
+```
+Warning: Failed to set locale category LC_NUMERIC to en_VN.
+Warning: Failed to set locale category LC_TIME to en_VN.
+Warning: Failed to set locale category LC_COLLATE to en_VN.
+Warning: Failed to set locale category LC_MONETARY to en_VN.
+Warning: Failed to set locale category LC_MESSAGES to en_VN.
+```
+Then you need to fix those errors first. Otherwise, eosfactory will denote it as a bug and stop nodes. In this case, you can fix this error by changing `Region` to `United States` on `Language & Region` for Mac users.
 
-We do not like Docker because WSL (Windows System Linux) does not support it. However, we can consider meeting demand from Linux System users, if we see such.
-
+### Cannot determine the source file of the contract. There is many files in the 'src' directory
+Navigate to contract directory then
+```sh
+cd .vscode
+nano c_cpp_properties.json
+```
+Copy the below content. Pay attention to the object `codeOptions` and modify `$CONTRACT_FILE` to your main contract file name
+```
+{
+    "configurations": [
+        {
+            "includePath": [
+                "/usr/local/Cellar/eosio.cdt/1.6.2/opt/eosio.cdt/include",
+                "/usr/local/Cellar/eosio.cdt/1.6.2/opt/eosio.cdt/include/libcxx",
+                "/usr/local/Cellar/eosio.cdt/1.6.2/opt/eosio.cdt/include/eosiolib/core",
+                "/usr/local/Cellar/eosio.cdt/1.6.2/opt/eosio.cdt/include/eosiolib/contracts",
+                "${workspaceFolder}",
+                "${workspaceFolder}/include"
+            ],
+            "libs": [],
+            "codeOptions": [
+                "--src src/$CONTRACT_FILE.cpp"
+            ],
+            "testOptions": [],
+            "defines": [],
+            "intelliSenseMode": "clang-x64",
+            "browse": {
+                "path": [
+                    "/usr/local/Cellar/eosio.cdt/1.6.2/opt/eosio.cdt/include",
+                    "/usr/local/Cellar/eosio.cdt/1.6.2/opt/eosio.cdt/include/libcxx",
+                    "/usr/local/Cellar/eosio.cdt/1.6.2/opt/eosio.cdt/include/eosiolib/core",
+                    "/usr/local/Cellar/eosio.cdt/1.6.2/opt/eosio.cdt/include/eosiolib/contracts",
+                    "${workspaceFolder}",
+                    "${workspaceFolder}/include"
+                ],
+                "limitSymbolsToIncludedHeaders": true,
+                "databaseFilename": ""
+            }
+        }
+    ],
+    "version": 4
+}
+```
