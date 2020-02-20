@@ -606,6 +606,7 @@ def args(clear=False):
         "--signature-provider " + config.eosio_key_public() + "=KEY:" 
             + config.eosio_key_private(),
         "--plugin eosio::producer_plugin",
+        "--plugin eosio::producer_api_plugin",
         "--plugin eosio::chain_api_plugin",
         "--plugin eosio::http_plugin",
     ]

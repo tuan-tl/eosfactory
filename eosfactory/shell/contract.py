@@ -101,12 +101,6 @@ class Contract(ContractBuilder):
             max_cpu_usage=0, max_net_usage=0,
             ref_block=None,
             delay_sec=0):
-        
-        if not isinstance(account, eosfactory.shell.account.Account):
-            raise errors.Error("""
-            The account object has to be of the type 
-            ``eosfactory.shell.account.Account``.
-            """)
 
         super().__init__(
             contract_dir, abi_file=abi_file, wasm_file=wasm_file)

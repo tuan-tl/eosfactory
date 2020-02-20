@@ -673,7 +673,7 @@ class PushAction(Cleos):
             ref_block=None,
             delay_sec=0,
             is_verbose=True,
-            json=False
+            json=True
         ):
         self.account_name = interface.account_arg(account)
 

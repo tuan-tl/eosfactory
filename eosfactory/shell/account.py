@@ -962,8 +962,7 @@ def create_account(
                         expiration_sec, 
                         skip_sign, dont_broadcast, force_unique,
                         max_cpu_usage, max_net_usage,
-                        ref_block,
-                        delay_sec
+                        ref_block
                         )
             except errors.LowRamError as e:
                 logger.TRACE('''
