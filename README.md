@@ -1,5 +1,9 @@
-## Dependencies
+# EOSFactory 
+This is a step-by-step guideline to setup EOSFactory, an EOS smart contract testing framework.
 
+## Dependencies
+* [EOSIO](/eosio)
+* [EOSIO.cdt]()
 
 ## Installation
 Clone EOSFactory source code from the repository:
@@ -162,3 +166,5 @@ Copy the below content. Pay attention to the object `codeOptions` and modify `$C
     "version": 4
 }
 ```
+## References
+* _Installing EOSFactory_, viewed <<https://eosfactory.io/build/html/tutorials/01.InstallingEOSFactory.html>>.
